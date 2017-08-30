@@ -1,0 +1,235 @@
+[gd_scene load_steps=24 format=1]
+
+[ext_resource path="res://World.gd" type="Script" id=1]
+[ext_resource path="res://gb.fnt" type="BitmapFont" id=2]
+[ext_resource path="res://DisplayText.gd" type="Script" id=3]
+[ext_resource path="res://ScrollingBackground.gd" type="Script" id=4]
+[ext_resource path="res://low-res-back.tex" type="Texture" id=5]
+[ext_resource path="res://shadow.tex" type="Texture" id=6]
+[ext_resource path="res://shadow.gd" type="Script" id=7]
+[ext_resource path="res://low-res-log.tex" type="Texture" id=8]
+[ext_resource path="res://log.gd" type="Script" id=9]
+[ext_resource path="res://lowres.ogg" type="AudioStream" id=10]
+[ext_resource path="res://low-res-loss.tex" type="Texture" id=11]
+[ext_resource path="res://low-res-pixel.tex" type="Texture" id=12]
+[ext_resource path="res://low-res-wheel.tex" type="Texture" id=13]
+[ext_resource path="res://low-res-wheel2.tex" type="Texture" id=14]
+[ext_resource path="res://low-res-wheel3.tex" type="Texture" id=15]
+[ext_resource path="res://low-res-wheel4.tex" type="Texture" id=16]
+[ext_resource path="res://rock.gd" type="Script" id=17]
+[ext_resource path="res://rockstill.gd" type="Script" id=18]
+[ext_resource path="res://low-res-up.tex" type="Texture" id=19]
+[ext_resource path="res://low-res-play.tex" type="Texture" id=20]
+[ext_resource path="res://small.fnt" type="BitmapFont" id=21]
+[ext_resource path="res://DisplayScore.gd" type="Script" id=22]
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "stop",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="World" type="Node2D"]
+
+script/script = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 0
+size_flags/vertical = 0
+margin/left = 1.0
+margin/top = 0.0
+margin/right = 41.0
+margin/bottom = 15.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.699219, 0.210312, 0.210312, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = -1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+script/script = ExtResource( 3 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+layer = -1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+scroll/offset = Vector2( 0, 0 )
+scroll/base_offset = Vector2( 0, 0 )
+scroll/base_scale = Vector2( 1, 1 )
+scroll/limit_begin = Vector2( 0, 0 )
+scroll/limit_end = Vector2( 0, 0 )
+scroll/ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+motion/scale = Vector2( 1, 1 )
+motion/offset = Vector2( 0, 0 )
+motion/mirroring = Vector2( 64, 0 )
+script/script = ExtResource( 4 )
+
+[node name="TextureFrame" type="TextureFrame" parent="ParallaxBackground/ParallaxLayer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 64.0
+margin/bottom = 64.0
+texture = ExtResource( 5 )
+stretch_mode = 0
+
+[node name="ParallaxLayer1" type="ParallaxLayer" parent="ParallaxBackground"]
+
+motion/scale = Vector2( 1, 1 )
+motion/offset = Vector2( 0, 0 )
+motion/mirroring = Vector2( 64, 0 )
+script/script = ExtResource( 4 )
+
+[node name="TextureFrame" type="TextureFrame" parent="ParallaxBackground/ParallaxLayer1"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 128.0
+margin/top = 0.0
+margin/right = 192.0
+margin/bottom = 64.0
+texture = ExtResource( 5 )
+stretch_mode = 0
+
+[node name="Shadow" type="Sprite" parent="."]
+
+transform/pos = Vector2( 13.8203, 47.6426 )
+z/z = 2
+texture = ExtResource( 6 )
+script/script = ExtResource( 7 )
+
+[node name="Log" type="Sprite" parent="."]
+
+transform/pos = Vector2( 61.7136, 48.1689 )
+z/z = 4
+texture = ExtResource( 8 )
+script/script = ExtResource( 9 )
+
+[node name="StreamPlayer" type="StreamPlayer" parent="."]
+
+stream/stream = ExtResource( 10 )
+stream/play = false
+stream/loop = true
+stream/volume_db = 0.0
+stream/autoplay = true
+stream/paused = false
+stream/loop_restart_time = 0.0
+stream/buffering_ms = 500
+
+[node name="Lose" type="Sprite" parent="."]
+
+visibility/visible = false
+transform/pos = Vector2( 33.1561, 19.6623 )
+texture = ExtResource( 11 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+
+transform/pos = Vector2( 32.4105, 27.0445 )
+z/z = 1
+config/amount = 15
+config/lifetime = 0.1
+config/emitting = false
+config/process_mode = 1
+config/texture = ExtResource( 12 )
+params/direction = 0.0
+params/spread = 180.0
+params/linear_velocity = 100.38
+params/spin_velocity = 10.0
+params/orbit_velocity = 90.0
+params/gravity_direction = 0.0
+params/gravity_strength = 9.8
+params/radial_accel = 20.0
+params/tangential_accel = 10.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 1.0
+params/final_size = 1.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+randomness/hue_variation = 0.1
+
+[node name="Rock" type="AnimatedSprite" parent="."]
+
+transform/pos = Vector2( 12.8692, 44.6046 )
+z/z = 5
+frames = SubResource( 1 )
+animation = "default"
+playing = true
+script/script = ExtResource( 17 )
+
+[node name="RockStill" type="Sprite" parent="."]
+
+visibility/visible = false
+transform/pos = Vector2( 14.0261, 46.056 )
+z/z = 6
+texture = ExtResource( 13 )
+script/script = ExtResource( 18 )
+
+[node name="Arrow" type="Sprite" parent="."]
+
+transform/pos = Vector2( 32.6086, 27.1976 )
+texture = ExtResource( 19 )
+
+[node name="Button" type="Button" parent="."]
+
+rect/scale = Vector2( 0.5, 0.5 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 0
+size_flags/vertical = 0
+margin/left = 23.0
+margin/top = 32.0
+margin/right = 55.0
+margin/bottom = 70.0
+custom_fonts/font = ExtResource( 2 )
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+icon = ExtResource( 20 )
+flat = false
+
+[node name="Label1" type="Label" parent="."]
+
+anchor/left = 3
+anchor/right = 3
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 0
+size_flags/vertical = 0
+margin/left = 21.0
+margin/top = 17.0
+margin/right = -19.0
+margin/bottom = 32.0
+custom_fonts/font = ExtResource( 21 )
+custom_colors/font_color = Color( 0.699219, 0.210312, 0.210312, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = -1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+script/script = ExtResource( 22 )
+
+
